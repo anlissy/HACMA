@@ -15,7 +15,7 @@ body {
     width: 250px;
     position: fixed;
     z-index: 1;
-    top: 70;
+    top: 70px;
     left: 0;
     background-color:  #f2f2f2;
     overflow-x: hidden;
@@ -41,8 +41,14 @@ body {
 .welcome_container{
  border: none; 
  background-color: #482ea7; 
+ width: 100%;
  color:#482ea7; 
  height: 70px; 
+ position: fixed;
+ top: 0px;
+ left: 0px;
+ z-index: 1;
+ 
    }
    
 .number_container{
@@ -52,7 +58,7 @@ body {
   width: 300px;
   height: 120px;
   margin-left: 400px;
-  margin-top: 25px;
+  margin-top: 95px;
   margin-right: 60px;
   float:left;
   display: inline-block;
@@ -83,7 +89,7 @@ body {
   background: #f2f2f2;
   width: 400px;
   height: 260px;
-  margin-top: 25px; 
+  margin-top: 95px; 
   float:left;
   padding: 5px;
   text-align: left;
@@ -1064,3 +1070,6 @@ body {
   -webkit-transform: rotate(361deg);
           transform: rotate(361deg);
 }
+
+
+     

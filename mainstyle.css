@@ -101,7 +101,7 @@ and open the template in the editor.
 }
 body {
   background: #7B62C0; /* fallback for old browsers */
-  font-family: "Roboto", sans-serif;
+  font-family: "Verdana", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
 }

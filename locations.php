@@ -16,8 +16,8 @@ and open the template in the editor.
   background: #f2f2f2;
   width: 265px;
   height: 320px;
-  margin-left: 300px;
-  margin-top: 100px;
+  margin-left: 22%;
+  margin-top: 50px;
   float:left;
   display: inline-block;
   padding-top: 15px;
@@ -33,7 +33,7 @@ and open the template in the editor.
   background: #f2f2f2;
   width: 265px;
   height: 320px;
-  margin-top: 100px;
+  margin-top: 50px;
   float:left;
   display: inline-block;
   padding-top: 15px;
@@ -48,7 +48,7 @@ and open the template in the editor.
   background: #f2f2f2;
   width: 265px;
   height: 320px;
-  margin-top: 100px;
+  margin-top: 50px;
   float:left;
   display: inline-block;
   padding-top: 15px;
@@ -64,7 +64,7 @@ and open the template in the editor.
   background: #f2f2f2;
   width: 255px;
   height: 320px;
-  margin-top: 100px;
+  margin-top: 50px;
   float:left;
   display: inline-block;
   padding-top: 15px;
@@ -110,6 +110,25 @@ and open the template in the editor.
    
    
 }
+
+.heading{
+    font-family: Verdana, sans-serif; 
+    font-size: 30px;
+    color: #1a1919; 
+    padding: 0px 0px 0px 0px;
+    margin: 6% 0px 0px 15%;
+    text-align: center;
+   
+}
+
+hr {
+    background-color: #4A26AE;
+    height: 2px;
+    width: 10%;
+    align-content: center;
+    margin: 1% 0% 0% 52.4%;
+}
+     
             
         </style>
     </head>
@@ -136,7 +155,8 @@ and open the template in the editor.
                $name = $row["user_name"]; 
             } 
             ?>
-        
+       
+              
         <div class="cabinet-page">
         
             <form class="cabinet-form">
@@ -151,12 +171,12 @@ and open the template in the editor.
                 <div class="sidenav">
                     <a href="cabinet.php"><i class="square" ></i>Main Page</a>
                     <a href="package.php"><i class="square" ></i>Package</a>
-                    <a href="#"><i class="square" ></i>Usage</a>
+                    <a href="usage.php"><i class="square" ></i>Usage</a>
                     <a href="topup-number.php"><i class="square" ></i>Top-up</a>
-                    <a href="#"><i class="square" ></i>FAQ</a>
-                    <a href="#"><i class="square" ></i>Chat with us</a>
+                    <a href="faq.php"><i class="square" ></i>FAQ</a>
+                    <a href="chatmain.php"><i class="square" ></i>Contact us</a>
                     <a href="locations.php"><i class="square" ></i>Find stores</a>
-                    <a href="#"><i class="square" ></i>Log out</a>
+                    <a href="userlogin.php"><i class="square" ></i>Log out</a>
                     <br><br><br><br>
                     
                     <!-- LOGO IN TABLE-->
@@ -168,6 +188,10 @@ and open the template in the editor.
                     </table>
                     
                  </div>
+                
+                
+        <p class="heading" style="text-align: center;">Our stores</p>
+              <hr>
                 
               <div class="location1">
                   <img src="img/helsinki_icon.png">

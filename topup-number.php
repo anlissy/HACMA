@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html>
-
 <?php
+
+session_start();
 
 function checkuser() {
 
 $watestdb = new PDO('mysql:host=localhost:8889;dbname=HACMA', 'WATestUser1', 'WATestPwd1');
 
-$sql = "SELECT * FROM User WHERE user_phone='".$_POST['phone']."';";
+$phone = $_POST['phone'];
+$sql = "SELECT * FROM User WHERE user_phone='".$phone."';";
       
         $phone = $watestdb->query($sql);
         
@@ -16,13 +16,41 @@ $sql = "SELECT * FROM User WHERE user_phone='".$_POST['phone']."';";
           
             $row = $phone->fetch(); 
             $check = $row["user_balance"]; 
+            
             return $check;
             }
            
             //$check->closeCursor();
-            
+}
+
+ 
+
+
+$errormessage1 ="";
+
+if(isset($_POST["submit"])) {
+
+    $user = checkuser(); 
+
+    if ($user != NULL ){
+        $_SESSION["phone"] = $_POST["phone"];
+        header('Location: topup-package.php');
+        exit();
+    } 
+    else 
+    {               
+        $errormessage1 = "<h5 style=\"color:red;\">*Incorrect number</h5>";
+    }              
 }
 ?>
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+
 
 
     <head>
@@ -34,8 +62,9 @@ $sql = "SELECT * FROM User WHERE user_phone='".$_POST['phone']."';";
         <style>
 
                 .container {
-                      width: 100%; 
-
+                    width: 100%; 
+                    padding-bottom: 10px;
+                    
                  }
                  .progressbar {
                      counter-reset: step;
@@ -113,16 +142,17 @@ $sql = "SELECT * FROM User WHERE user_phone='".$_POST['phone']."';";
                  border-radius: 25px;               */
                     position: relative;
                      z-index: 1;
-                     background: #F0EEF1;
+                     background: #f2f2f2;
                      max-width: 70%;
-                     margin: 5% 10% 25% 35%;
+                     margin: 10% 10% 25% 29%;
                      padding-left: 20px;
                      padding-right: 20px;
                      padding-bottom: 20px;
-                     padding-top: 5px;
+                     padding-top: 20px;
                      text-align: center;
                      box-shadow: 0 15px 25px 0 rgba(0, 0, 0, 0.22), 5px 5px 5px 0 rgba(0, 0, 0, 0.24);
                      border-radius: 25px;
+                    
                }
                
                
@@ -152,7 +182,7 @@ $sql = "SELECT * FROM User WHERE user_phone='".$_POST['phone']."';";
                  border: none;
                  padding: 10px 20px;
                  font-size: 17px;
-                font-family: "Roboto", sans-serif;
+                font-family: Verdana, sans-serif;
                  cursor: pointer;
                  border-radius: 5px;
                 text-align: center;
@@ -161,69 +191,79 @@ $sql = "SELECT * FROM User WHERE user_phone='".$_POST['phone']."';";
                button:hover {
                  opacity: 0.8;
                }
+               
+               .square {
+                    width: 16px;
+                    height: 16px;
+                    background: #4A26AE;
+                    border-radius: 5px 5px 5px 5px;
+                    margin-top: 10px;
+                    margin-left: 10px;
+                    margin-right: 10px;
+                    padding-left: 15px;
+                    padding-right: 15px;
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                }
         </style>
     
 </head>
 
 <body>
 
-    <div class="welcome_container">
-        <h3 style="color: #ffffff; padding: 20px 0px 0px 20px; margin: 0px 0px 0px 0px; font-family: Verdana, sans-serif" >Top-up: Your number</h3>
-    </div>
+    <!-- WELCOME CONTAINER-->
+                <div class="welcome_container">
+                    <h3 style="color: #ffffff; padding: 20px 0px 0px 20px; margin: 0px 0px 0px 0px; font-family: Verdana, sans-serif" >
+                    <label id="name">Top-up: enter number</h3>
+                </div>
                 
-    <div class="sidenav">
-        <a href="cabinet.php"><i class="square" ></i>Main Page</a>
+    <!-- PAGE NAVIGATION MENU-->
+                <div class="sidenav">
+                    <a href="cabinet.php"><i class="square" ></i>Main Page</a>
                     <a href="package.php"><i class="square" ></i>Package</a>
-                    <a href="#"><i class="square" ></i>Usage</a>
+                    <a href="usage.php"><i class="square" ></i>Usage</a>
                     <a href="topup-number.php"><i class="square" ></i>Top-up</a>
-                    <a href="#"><i class="square" ></i>FAQ</a>
-                    <a href="#"><i class="square" ></i>Chat with us</a>
+                    <a href="faq.php"><i class="square" ></i>FAQ</a>
+                    <a href="chatmain.php"><i class="square" ></i>Contact us</a>
                     <a href="locations.php"><i class="square" ></i>Find stores</a>
-                    <a href="#"><i class="square" ></i>Log out</a>
-
-    </div>
+                    <a href="userlogin.php"><i class="square" ></i>Log out</a>
+                    <br><br><br><br>
+                    
+                    <!-- LOGO IN TABLE-->
+                    <table style="width:100%">
+                    <tr>
+                    <td style="width:30%"><img src="img/hacmalogopurple.png" style="border-radius: 50%; margin: 15px;"></td>
+                    <td style="width:70%"><b style="text-align: left; font-size:20px;">HACMA</b></td>
+                    </tr>
+                    </table>
+                    
+                 </div>
     
-    <form id="regForm" action="topup-package.php" method="post">
+    <form id="regForm" action="topup-number.php" method="post" autocomplete="on">
             <div class="container">
                 <ul class="progressbar">
-                    <a href="topup-number.php"><li class="active">number</li></a>
-                    <li>package</li>
-                    <li >basket</li>
+                    <li class="active">number</li>
+                    <li >package</li>
+                    <li>basket</li>
                     <li>payment</li>
                 </ul>
                 </div>
                 
             <div class="table" style="text-align: center;">
+                <br><br><br><br>
                 <h4 style="text-align: center; color: #393035;">Your phone number:</h4>
-                <p><input name="phone" type="text" placeholder="+358 XX XXX XX-XX" /></p>
-                
-                <?php 
-//                    $buttonclick = $_POST["submit"];
-        
-                    if(isset($buttonclick)) {
-            
-                        $user = checkuser(); 
-                        
-                        if ($user != NULL ){
-                            $userphone = $_POST["phone"];
-            //                session_start();
-            //                $_SESSION['phone'] = $userphone;
-            //                session_abort();
-            //               
-            //                header('Location: topup-package');
-                        } else { ?>
-                        
-                <br><h4>Incorrect number. Try again</h4>
-                
-                <?php
-                        }
-                    }
-                ?>
+                <p><input name="phone" type="text" placeholder="0 45 XXX XX-XX" /></p>
                 
             </div>
                 
             <div class="wrapper">
             <div><button type="submit" name="submit">Select</button></div>
+            
+                <?php 
+                    echo $errormessage1;
+                
+                ?>
+                
             </div>
         </form>
     

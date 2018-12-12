@@ -957,12 +957,12 @@ and open the template in the editor.
                 <div class="sidenav">
                     <a href="cabinet.php"><i class="square" ></i>Main Page</a>
                     <a href="package.php"><i class="square" ></i>Package</a>
-                    <a href="#"><i class="square" ></i>Usage</a>
+                    <a href="usage.php"><i class="square" ></i>Usage</a>
                     <a href="topup-number.php"><i class="square" ></i>Top-up</a>
-                    <a href="#"><i class="square" ></i>FAQ</a>
-                    <a href="#"><i class="square" ></i>Chat with us</a>
+                    <a href="faq.php"><i class="square" ></i>FAQ</a>
+                    <a href="chatmain.php"><i class="square" ></i>Contact us</a>
                     <a href="locations.php"><i class="square" ></i>Find stores</a>
-                    <a href="#"><i class="square" ></i>Log out</a>
+                    <a href="userlogin.php"><i class="square" ></i>Log out</a>
                     <br><br><br><br>
                     
                     <!-- LOGO IN TABLE-->
@@ -995,7 +995,7 @@ and open the template in the editor.
               
               <!-- MINUTES HAVE RETRIEVAL-->  
               <?php
-              $sql = "SELECT package_call FROM Package, user WHERE (user.user_phone='".$userphone."' AND user.user_package= Package.package_name);";
+              $sql = "SELECT package_call FROM Package, user WHERE (user.user_phone='".$userphone."' AND user.user_package= Package.package_id);";
               $check = $watestdb->query($sql);
               for ($i = 0; $i < $check->rowCount(); $i++) 
               { 
@@ -1004,7 +1004,7 @@ and open the template in the editor.
               } 
               
               //MINUTES REST RETRIEVAL
-              $sql = "SELECT Rest_call FROM Rest, Package, user WHERE (user.user_phone='".$userphone."' AND user.user_package= Package.package_name AND Package.package_restid = Rest.Rest_id) ;";
+              $sql = "SELECT Rest_call FROM Rest, Package, user WHERE (user.user_phone='".$userphone."' AND user.user_package= Package.package_id AND Package.package_restid = Rest.Rest_id) ;";
               $check = $watestdb->query($sql);
               for ($i = 0; $i < $check->rowCount(); $i++) 
               { 
@@ -1021,7 +1021,7 @@ and open the template in the editor.
               
               //SMS HAVE RETRIEVAL
               
-              $sql = "SELECT package_sms FROM Package, user WHERE (user.user_phone='".$userphone."' AND user.user_package= Package.package_name);";
+              $sql = "SELECT package_sms FROM Package, user WHERE (user.user_phone='".$userphone."' AND user.user_package= Package.package_id);";
               $check = $watestdb->query($sql);
               for ($i = 0; $i < $check->rowCount(); $i++) 
               { 
@@ -1030,7 +1030,7 @@ and open the template in the editor.
               } 
               
               //SMS REST RETRIEVAL
-              $sql = "SELECT Rest_sms FROM Rest, Package, user WHERE (user.user_phone='".$userphone."' AND user.user_package= Package.package_name AND Package.package_restid = Rest.Rest_id) ;";
+              $sql = "SELECT Rest_sms FROM Rest, Package, user WHERE (user.user_phone='".$userphone."' AND user.user_package= Package.package_id AND Package.package_restid = Rest.Rest_id) ;";
               $check = $watestdb->query($sql);
               for ($i = 0; $i < $check->rowCount(); $i++) 
               { 
@@ -1042,7 +1042,7 @@ and open the template in the editor.
               
               //INTERNET HAVE RETRIEVAL
               
-              $sql = "SELECT package_mgb FROM Package, user WHERE (user.user_phone='".$userphone."' AND user.user_package= Package.package_name);";
+              $sql = "SELECT package_mgb FROM Package, user WHERE (user.user_phone='".$userphone."' AND user.user_package= Package.package_id);";
               $check = $watestdb->query($sql);
               for ($i = 0; $i < $check->rowCount(); $i++) 
               { 
@@ -1051,7 +1051,7 @@ and open the template in the editor.
               } 
               
               //SMS REST RETRIEVAL
-              $sql = "SELECT Rest_mgb FROM Rest, Package, user WHERE (user.user_phone='".$userphone."' AND user.user_package= Package.package_name AND Package.package_restid = Rest.Rest_id) ;";
+              $sql = "SELECT Rest_mgb FROM Rest, Package, user WHERE (user.user_phone='".$userphone."' AND user.user_package= Package.package_id AND Package.package_restid = Rest.Rest_id) ;";
               $check = $watestdb->query($sql);
               for ($i = 0; $i < $check->rowCount(); $i++) 
               { 
@@ -1059,7 +1059,7 @@ and open the template in the editor.
                 $rest_mgb = $row["Rest_mgb"]; 
               } 
               
-              $percent_mgb = intdiv((($rest_mgb/$mgb)*100), 1);
+              $percent_mgb = intdiv((($rest_mgb/$mgb)*100), 01);
               
               ?>
              
@@ -1103,7 +1103,7 @@ and open the template in the editor.
               <div class="wrapper" >
               <div class="pie start-0 end-<?php echo $percent_mgb;?>"></div>
               <div class="pie big start-<?php echo $percent_mgb;?> end-<?php echo 100-$percent_mgb;?>"></div>
-              <div class="pie over"><span><?php print  intdiv($rest_mgb,1024); ?><br>GB</span></div>
+              <div class="pie over"><span><?php print number_format($rest_mgb/1024, 1, '.', ' '); ?><br>GB</span></div>
               </div>
                    
               <!-- INTERNET HAVE LABEL-->    

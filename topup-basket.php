@@ -2,27 +2,29 @@
     
 $watestdb = new PDO('mysql:host=localhost:8889;dbname=HACMA', 'WATestUser1', 'WATestPwd1');
 
+
+$userphone = $_POST["phone"];
+//$userSelect = "SELECT user_phone FROM User WHERE user_phone='".$userphone."';";
+//$userRecord =$watestdb->query($userSelect);
+
+
+        
 $packageChosen = $_POST["choosePackage"]; 
 
-$packageNameSelect = "SELECT package_name FROM Package WHERE package_id=". $packageChosen . "";
-$packageRecord = $watestdb->query($packageNameSelect);
+$packageNameSelect = "SELECT package_name FROM Package WHERE package_id=". $packageChosen . ";";
+$packageNameRecord = $watestdb->query($packageNameSelect);
 
-while($row = $packageRecord->fetch()) {  
+while($row = $packageNameRecord->fetch()) {  
  $packageName = $row[0];}
 
 $packagePriceSelect = "SELECT package_price FROM Package WHERE package_id=". $packageChosen . "";
 $packagePriceRecord = $watestdb->query($packagePriceSelect);
 
 while($row = $packagePriceRecord->fetch()) {  
- $packagePrice = $row[0];}
- 
+$packagePrice = $row[0];}
+                                     
+                                  
 
-$userphone = $_POST["phone"];
-$userSelect = "SELECT user_phone FROM User WHERE user_phone='".$userphone."';";
-$userRecord =$watestdb->query($userSelect);
-
-
-//var_dump($price);
 
 ?>
 
@@ -32,35 +34,29 @@ $userRecord =$watestdb->query($userSelect);
     <head>
         <title>Basket</title>
         <link rel="stylesheet" type="text/css" href="cabinet_style.css">
-        <link rel="stylesheet" type="text/css" href="cabinet_style.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-
-                table {
-                 border: 10px solid #F0EEF1;
+            table {
+                 
                  width: 100%;
-                 background-color: #FFFFFF;
+                 background-color: #f2f2f2;
                  text-align: center;
                  border-collapse: collapse;
 
 
                }
                table td, th {
-                border: 15px solid #F0EEF1;
-                padding: 5px 5px 5px 5px;
-                text-align: center;
-    }
+                border: 0px solid whitesmoke;
+                padding: 25px 15px 15px 15px;
+                text-align: left;
+                width: 300px;
+                }
                
-               table thead th {
-                 font-size: 16px;
-                 font-weight: bold;
-                 color: #393035;
-                 background-color: #F0EEF1;
-                 text-align: left;
-               }
+               
                 .container {
                      width: 100%;   
+                     padding-bottom: 10px;
                  }
                  .progressbar {
                      counter-reset: step;
@@ -116,18 +112,18 @@ $userRecord =$watestdb->query($userSelect);
 
                body {
                  background-color: #fffff;
-                font-family: "Roboto", sans-serif;
+                font-family: "Verdana", sans-serif;
                }
 
                #regForm {
                    
-                 position: relative;
+                 position: fixed;
                  float: right;
                  display: inline;
                  z-index:1;
-                 background: #F0EEF1;
+                 background: #f2f2f2;
                  max-width: 100%;
-                 margin: 5% 10% 25% 35%;
+                 margin: 10% 15% 20% 29%;
                  padding: 20px;
                  text-align: center;
                  box-shadow: 0 15px 25px 0 rgba(0, 0, 0, 0.22), 5px 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -140,16 +136,17 @@ $userRecord =$watestdb->query($userSelect);
                 .textstyle
                { padding: 10px;
                  width: 70%;  
-               border-radius: 5px;
+                border-radius: 5px;
                  background-color:#E3DFEE;
                 text-align: center;
-                align: center;
+                
+                
                }
                input {
                  padding: 10px;
                  width: 90%;
                  font-size: 17px;
-                 font-family: "Roboto", sans-serif;
+                 font-family: "Verdana", sans-serif;
                  border-radius: 5px;
                  background-color:#E3DFEE;
                }
@@ -164,7 +161,7 @@ $userRecord =$watestdb->query($userSelect);
                  border: none;
                  padding: 10px 20px;
                  font-size: 17px;
-                 font-family: "Roboto", sans-serif;
+                 font-family: "Vernada", sans-serif;
                  cursor: pointer;
                  border-radius: 5px;
                }
@@ -172,6 +169,22 @@ $userRecord =$watestdb->query($userSelect);
                button:hover {
                  opacity: 0.8;
                }
+               
+               .square {
+                    width: 16px;
+                    height: 16px;
+                    background: #4A26AE;
+                    border-radius: 5px 5px 5px 5px;
+                    margin-top: 10px;
+                    margin-left: 10px;
+                    margin-right: 10px;
+                    padding-left: 15px;
+                    padding-right: 15px;
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                }
+
+
 
         </style>
 
@@ -181,105 +194,114 @@ $userRecord =$watestdb->query($userSelect);
         <h3 style="color: #ffffff; padding: 20px 0px 0px 20px; margin: 0px 0px 0px 0px; font-family: Verdana, sans-serif" >Top-up: Your basket</h3>
         </div>
                 
-        <div class="sidenav">
-            <a href="cabinet.php"><i class="square" ></i>Main Page</a>
+        <!-- PAGE NAVIGATION MENU-->
+                <div class="sidenav">
+                    <a href="cabinet.php"><i class="square" ></i>Main Page</a>
                     <a href="package.php"><i class="square" ></i>Package</a>
-                    <a href="#"><i class="square" ></i>Usage</a>
+                    <a href="usage.php"><i class="square" ></i>Usage</a>
                     <a href="topup-number.php"><i class="square" ></i>Top-up</a>
-                    <a href="#"><i class="square" ></i>FAQ</a>
-                    <a href="#"><i class="square" ></i>Chat with us</a>
+                    <a href="faq.php"><i class="square" ></i>FAQ</a>
+                    <a href="chatmain.php"><i class="square" ></i>Contact us</a>
                     <a href="locations.php"><i class="square" ></i>Find stores</a>
-                    <a href="#"><i class="square" ></i>Log out</a>
-
-        </div>
+                    <a href="userlogin.php"><i class="square" ></i>Log out</a>
+                    <br><br><br><br>
+                    
+                    <!-- LOGO IN TABLE-->
+                    <table style="width:100%">
+                    <tr>
+                    <td style="width:30%"><img src="img/hacmalogopurple.png" style="border-radius: 50%; margin: 15px;"></td>
+                    <td style="width:70%"><b style="text-align: left; font-size:20px;">HACMA</b></td>
+                    </tr>
+                    </table>
+                    
+                 </div>
         
         <form id="regForm" action="topup-payment.php" method="post">
             <div class="container">
                 <ul class="progressbar">
-                <a href="topup-number.php"><li>number</li></a>
-                    <a href="topup-package.php"><li>package</li></a>
-                    <a href="topup-basket.php"><li  class="active">basket</li></a>
-                    <li>payment</li>
+                <li>number</li>
+                <li>package</li>
+                <li class="active">basket</li>
+                <li>payment</li>
                 </ul>
             </div>
             <div class="tab" style="text-align: center;">
+                <br><br><br>
+            <h4 colspan="4" style="margin-top: 30px;">Selected package in basket</h4>
             <table>
-                <thead>
-                    <tr>
-                        <th colspan="4">Selected package in basket</th>
-                    </tr>
-                </thead>
+                
                     <tr>
                         <td>
-                            <div style="text-align:center; font-weight: 700;padding-left:2px;"> Your phone number: 
-                        </td>
-                        <td>
-                           <?php echo "<div  class=\"textstyle\">" .$userphone. "</div>" ; ?> 
-                        </td>
-                        <td>
-                            <div style="text-align:center; font-weight: 700;padding-left:2px;"> Price without VAT </div> 
-                        </td>
-                        <td>
-<!--                            <div  class="textstyle"> 50$ </div>-->
+                            <span style="text-align:left; font-weight: 700;padding-left:2px;">Your phone</span> 
+                        
                             <?php 
-//                                
-                                    echo "<div  class=\"textstyle\">" . $packagePrice ."€ </div>";
-//                                
-//                          ?>
+                                echo "<span class=\"textstyle\">" .$userphone. "</span>" ; 
+                                echo "<input type=\"hidden\" name=\"phone\" value=".$userphone.">";
+                            ?> 
+                            
+                        </td>
+                        <td>
+                            <span style="text-align:left; font-weight: 700;padding-left:2px"> Price without VAT </span>
+                        
+                            <?php 
+                                echo "<span  class=\"textstyle\">" . $packagePrice . "</span>";
+                                echo "<input type=\"hidden\" name=\"packageprice\" value=".$packagePrice.">";
+                            ?>
+                            
                         </td>
                     </tr>
                 <tbody>
                     <tr>
                         <td>
-                            <div style="text-align:center; font-weight: 700;padding-left:2px;"> Package </div> 
-                        </td>
-                        <td>
+                            <span style="text-align:left; font-weight: 700;padding-left:2px;"> Package </span> 
+                        
                             <?php 
-                            
 //                                foreach($packageRecord as $package) {
-//                                    
-//                                            echo "<div  class=\"textstyle\">" . $package["package_name"] . "</div>";
-//
-//                                        
-//                                    
+                                    echo "<span  class=\"textstyle\">" . $packageName . "</span>";
 //                                }
-                            echo "<div  class=\"textstyle\">" . $packageName . "</div>";
-
+                                echo "<input type=\"hidden\" name=\"packagename\" value=\"".$packageName."\">";
                             ?>
                         </td>
 
                         <td>
-                            <div style="text-align:center; font-weight: 700;padding-left:2px;"> VAT amount  </div> 
-                        </td>
-                        <td>
-                            <div  class="textstyle"> 
+                            <span style="text-align:left; font-weight: 700;padding-left:2px;"> VAT amount  </span> 
+                        
+                            <span  class="textstyle"> 
                             <?php
+                            
                                 $vat = $packagePrice * 10/100;
                                 echo $vat;
+                            
+                            
                             ?>
-                            </div>
+                            </span>
                         </td>
 
                     </tr>
                 </tbody>
-</table>
+            </table>
+            <br/>
+            <br/>       
+            <table>
+                <tr> 
+                    <td><div style="text-align:center; font-weight: 700;padding-left:2px;"> Total  </div> </td>
+                    <td colspan="3"> 
+                        <div  class="textstyle"> 
+                            <?php 
+                                $totalPrice = $packagePrice+$vat;
+                                echo $totalPrice;
+                                echo "<input type=\"hidden\" name=\"totalprice\" value=\"". $totalPrice ."\">";
+                            ?> 
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br/>
+                <button type="submit" name="submit" value="Submit">Go to payment</button>         
 
-<table>
-    <tr> 
-        <td><div style="text-align:center; font-weight: 700;padding-left:2px;"> Total  </div> </td>
-        <td colspan="3"> 
-            <div  class="textstyle"> 
-                <?php echo $packagePrice + $vat;?> 
             </div>
-        </td>
-    </tr>
-</table>
 
-<button type="submit" name="submit" value="Submit">Go to payment</button>         
-
-</div>
-
-</form>
+        </form>
 
     </body>
 </html>
